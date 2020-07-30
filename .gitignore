@@ -1,0 +1,10 @@
+/node_modules/
+/build/
+/.vscode/
+/stats.json
+/storybook-static/
+/coverage 
+/server-build
+
+# stryker temp files
+.stryker-tmp
