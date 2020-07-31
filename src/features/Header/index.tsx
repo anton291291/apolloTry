@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { AppBar, Toolbar } from '@material-ui/core';
 import { Search } from './Search';
+import { GenreSelect } from './GenreSelect';
 
 const StyledAppBar = styled(AppBar)`
     height: 50px;
@@ -24,6 +25,7 @@ export const Header: React.FC<Props> = (props) => {
         <StyledAppBar position='fixed'>
             <Toolbar>
                 <Search />
+                <GenreSelect/>
             </Toolbar>
         </StyledAppBar>
     );
