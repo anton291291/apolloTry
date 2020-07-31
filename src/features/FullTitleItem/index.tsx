@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FullTitleHeader } from './FullTitleHeader';
 import { useQuery, gql } from '@apollo/client';
-import { Loader } from '@/shared/components/Loader';
 import { FullTitleInfo } from './FullTitleInfo';
 import { FullTitleRecomendations } from './FullTitleRecomendations';
 import { Box } from '@material-ui/core';
 import { FullTitleTagsChart } from './FullTitleTagsChart';
+import { LinearLoader } from '@/shared/components/LinearLoader';
 
 const Container = styled.div`
     margin: 0 15%;
@@ -52,7 +52,7 @@ const GET_FULL_TITLE_INFO = gql`
                 nodes {
                     mediaRecommendation {
                         id
-                        averageScore
+                        meanScore
                         coverImage {
                             large
                         }
@@ -77,7 +77,7 @@ export const FullTitleItem: React.FC<Props> = (props) => {
         variables: { id: id }
     });
 
-    if (loading) return <Loader />;
+    if (loading) return <LinearLoader />;
     if (error) return <div>Error!!!</div>;
 
     const { Media } = data;
@@ -87,7 +87,7 @@ export const FullTitleItem: React.FC<Props> = (props) => {
     return (
         <Container>
             <FullTitleHeader
-            rating={Media.meanScore}
+                rating={Media.meanScore}
                 genres={Media.genres}
                 titleName={Media.title.romaji}
                 description={Media.description}
@@ -107,7 +107,10 @@ export const FullTitleItem: React.FC<Props> = (props) => {
                     ).toLocaleDateString(Media.endDate)}
                     popularity={Media.popularity}
                 />
-                <FullTitleTagsChart tagsData={Media.tags} />
+
+                {Media.tags.length != 0 && (
+                    <FullTitleTagsChart tagsData={Media.tags} />
+                )}
             </Box>
             {Media.recommendations.nodes.length != 0 && (
                 <FullTitleRecomendations

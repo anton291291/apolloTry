@@ -7,7 +7,7 @@ import { searchVar } from '@/shared/cache';
 
 const Icon = styled(SearchIcon)`
     position: absolute;
-    top: 0px;
+    top: 3px;
     left: 2px;
     color: black;
     z-index: 2;
@@ -21,8 +21,8 @@ const SearchInput = styled(StyledInput)`
 const SearchProgress = styled(CircularProgress)`
     && {
         position: absolute;
-        right: 6px;
-        top: 3px;
+        right: 5px;
+        top: 4px;
         z-index: 2;
         &&.MuiCircularProgress-colorPrimary {
             color: rgb(72, 61, 139);
@@ -35,17 +35,17 @@ type Props = {};
 export const Search: React.FC<Props> = (props) => {
     const {} = props;
 
-    const { searchInputValue } = searchVar();
+    const { searchInputValue, isLoading } = searchVar();
 
     const handleSearch = (e: SyntheticEvent) => {
-        searchVar({ searchInputValue: (e.target as HTMLInputElement).value });
+        searchVar({ searchInputValue: (e.target as HTMLInputElement).value, isLoading });
     };
 
     return (
         <Box position='relative' display='flex'>
             <Icon />
             <SearchInput value={searchInputValue} onChange={handleSearch} />
-            {/* {loading && <SearchProgress size={15} />} */}
+            {isLoading && searchInputValue && <SearchProgress size={20} />}
         </Box>
     );
 };

@@ -66,7 +66,7 @@ export const FullTitleRecomendations: React.FC<Props> = (props) => {
                             arrow
                             title={`${mediaRecommendation.title.romaji}
                         //
-                        Rating: ${mediaRecommendation.averageScore}`}
+                        Rating: ${mediaRecommendation.meanScore}`}
                         >
                             <Cover src={mediaRecommendation.coverImage.large} />
                         </StyledTooltip>

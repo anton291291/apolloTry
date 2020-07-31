@@ -44,7 +44,6 @@ export const SearchedList: React.FC<Props> = (props) => {
         });
     }, 200);
 
-
     useEffect(() => {
         const selector = document.querySelector('#searchScrollList');
         document.addEventListener('scroll', () => {
@@ -60,7 +59,6 @@ export const SearchedList: React.FC<Props> = (props) => {
         setIsLoading(false);
     });
 
-
     if (loading) return <Loader />;
 
     return (
@@ -69,7 +67,7 @@ export const SearchedList: React.FC<Props> = (props) => {
                 <TitleItem
                     id={item.id}
                     date={`(${item.startDate.year})`}
-                    rating={item.averageScore}
+                    rating={item.meanScore}
                     genres={item.genres}
                     key={item.id}
                     image={item.bannerImage}

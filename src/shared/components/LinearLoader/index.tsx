@@ -6,11 +6,11 @@ import { LinearProgress } from '@material-ui/core';
 const Progress = styled(LinearProgress)`
     && {
         &&.MuiLinearProgress-colorPrimary {
-            background-color: rgb(0, 206, 209);
+            background-color: rgb(72, 61, 139);
         }
 
         .MuiLinearProgress-barColorPrimary {
-            background-color: rgb(222, 184, 135);
+            background-color: rgb(123, 104, 238);
         }
 
         &.MuiLinearProgress-root {
@@ -20,6 +20,8 @@ const Progress = styled(LinearProgress)`
             bottom: 0px;
             left: 0px;
             width: 100vw;
+            z-index: 1;
+            height: 6px;
         }
     }
 `;

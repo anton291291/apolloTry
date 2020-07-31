@@ -25,6 +25,7 @@ type Props = {
 export const FullTitleTagsChart: React.FC<Props> = (props) => {
     const { tagsData } = props;
 
+
     return (
         <ChartTile>
             <Typography align='center' variant='h6'>

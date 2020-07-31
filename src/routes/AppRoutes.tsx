@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Loader } from '@/shared/components/Loader';
 
 const Home = lazy(() => import('@/pages/Home'));
 const FullTitlePage = lazy(() => import('@/pages/FullTitlePage'));
@@ -20,7 +21,7 @@ const routes = [
 export const AppRoutes: React.FC<{}> = (props) => {
     return (
         <BrowserRouter>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Loader/>}>
                 <Switch>
                     {routes.map((item) => (
                         <Route

@@ -3,7 +3,6 @@ import { gql, useQuery } from '@apollo/client';
 import styled from 'styled-components';
 import { TitleItem } from '../TitleItem';
 import { useDebouncedCallback } from 'use-debounce';
-import { Loader } from '@/shared/components/Loader';
 import { LinearLoader } from '@/shared/components/LinearLoader';
 
 const Container = styled.div`
@@ -28,7 +27,7 @@ const GET_TITLE_LIST = gql`
                 endDate {
                     year
                 }
-                averageScore
+                meanScore
             }
             pageInfo {
                 currentPage
@@ -87,7 +86,7 @@ export const TitleList: React.FC<Props> = (props) => {
         setIsLoading(false);
     });
 
-    if (loading) return <Loader />;
+    if (loading) return <LinearLoader/>;
 
     if (error) return <div>Error</div>;
 
@@ -97,7 +96,7 @@ export const TitleList: React.FC<Props> = (props) => {
                 <TitleItem
                     id={item.id}
                     date={`(${item.startDate.year})`}
-                    rating={item.averageScore}
+                    rating={item.meanScore}
                     genres={item.genres}
                     key={item.id}
                     image={item.bannerImage}

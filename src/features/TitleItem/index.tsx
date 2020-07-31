@@ -40,7 +40,14 @@ export const TitleItem: React.FC<Props> = (props) => {
             <Card>
                 <CardActionArea>
                     <Link exact to={`anime/${id}`}>
-                        <CardImage image={image} title={title} />
+                        <CardImage
+                            image={
+                                image
+                                    ? image
+                                    : 'https://www.purefandom.com/wp-content/uploads/2018/12/Deku-crying-780x405.png'
+                            }
+                            title={title}
+                        />
                         <CardContent>
                             <Typography
                                 gutterBottom

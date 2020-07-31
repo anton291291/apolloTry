@@ -20,8 +20,8 @@ export const StyledChip = styled(Chip)<{ bColor: string }>`
 
 export const StyledInput = styled.input`
     position: relative;
-    height: 20px;
-    border-radius: 10px;
+    height: 26px;
+    border-radius: 12px;
     border: 0;
 
     &:focus {
