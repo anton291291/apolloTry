@@ -1,11 +1,23 @@
 import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
 import SearchIcon from '@material-ui/icons/Search';
-import { Box, CircularProgress } from '@material-ui/core';
+import { Box, CircularProgress, Fade } from '@material-ui/core';
 import { StyledInput } from '@/shared/styled components';
 import { searchVar } from '@/shared/cache';
+import ClearIcon from '@material-ui/icons/Clear';
 
-const Icon = styled(SearchIcon)`
+const IconClear = styled(ClearIcon)`
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    color: rgb(72, 61, 139);
+
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const IconSearch = styled(SearchIcon)`
     position: absolute;
     top: 3px;
     left: 2px;
@@ -37,15 +49,27 @@ export const Search: React.FC<Props> = (props) => {
 
     const { searchInputValue, isLoading } = searchVar();
 
+    const handleClear = () => {
+        searchVar({ searchInputValue: '', isLoading });
+    };
+
     const handleSearch = (e: SyntheticEvent) => {
-        searchVar({ searchInputValue: (e.target as HTMLInputElement).value, isLoading });
+        searchVar({
+            searchInputValue: (e.target as HTMLInputElement).value,
+            isLoading
+        });
     };
 
     return (
         <Box position='relative' display='flex'>
-            <Icon />
+            <IconSearch />
             <SearchInput value={searchInputValue} onChange={handleSearch} />
             {isLoading && searchInputValue && <SearchProgress size={20} />}
+            {!isLoading && searchInputValue && (
+                <Fade in={true}>
+                    <IconClear onClick={handleClear} />
+                </Fade>
+            )}
         </Box>
     );
 };
