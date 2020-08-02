@@ -82,8 +82,6 @@ export const FullTitleItem: React.FC<Props> = (props) => {
 
     const { Media } = data;
 
-    console.log(Media);
-
     return (
         <Container>
             <FullTitleHeader

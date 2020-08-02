@@ -6,6 +6,7 @@ import { Tile, StyledSkeleton } from '@/shared/styled components';
 import { GenresChips } from '@/shared/components/GenresChips';
 import { RatingChip } from '@/shared/components/RatingChip';
 import { useImageLoad } from '@/shared/hooks/useImageLoad';
+import { GoHomeBtn } from '@/shared/components/GoHomeBtn';
 
 const Cover = styled.img`
     height: 400px;
@@ -46,7 +47,10 @@ export const FullTitleHeader: React.FC<Props> = (props) => {
                     <Cover src={imageSrc} />
                 )}
                 <Box width='80%' display='flex' flexDirection='column' pl={4}>
-                    <Typography variant='h4'>{titleName}</Typography>
+                    <Box display='flex'>
+                        <Typography variant='h4'>{titleName}</Typography>
+                        <GoHomeBtn />
+                    </Box>
                     <p>
                         <Typography variant='body1'>{description}</Typography>
                     </p>
