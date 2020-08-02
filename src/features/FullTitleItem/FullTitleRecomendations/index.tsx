@@ -4,10 +4,9 @@ import styled from 'styled-components';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import { gql, useQuery } from '@apollo/client';
-import { Link } from 'react-router-dom';
 import { Tile } from '@/shared/styled components';
 import { Box, Typography, Tooltip } from '@material-ui/core';
+import { FullTitleRecommendationItem } from './FullTitleRecommendationItem';
 
 const settings = {
     dots: false,
@@ -19,13 +18,6 @@ const settings = {
     autoplaySpeed: 1000,
     cssEase: 'linear' */
 };
-
-const Cover = styled.img`
-    margin: 0 5px;
-    width: 180px !important;
-    height: 280px;
-    box-shadow: 0 0 5px;
-`;
 
 const StyledSlider = styled(Slider)`
     && {
@@ -45,8 +37,6 @@ const StyledSlider = styled(Slider)`
     }
 `;
 
-const StyledTooltip = styled(Tooltip)``;
-
 type Props = {
     recommendedTitles: Array<string | {}>;
 };
@@ -61,16 +51,12 @@ export const FullTitleRecomendations: React.FC<Props> = (props) => {
             </Typography>
             <StyledSlider {...settings}>
                 {recommendedTitles.map(({ mediaRecommendation }) => (
-                    <Link to={`/anime/${mediaRecommendation.id}`}>
-                        <StyledTooltip
-                            arrow
-                            title={`${mediaRecommendation.title.romaji}
-                        //
-                        Rating: ${mediaRecommendation.meanScore}`}
-                        >
-                            <Cover src={mediaRecommendation.coverImage.large} />
-                        </StyledTooltip>
-                    </Link>
+                    <FullTitleRecommendationItem
+                        linkTo={mediaRecommendation.id}
+                        image={mediaRecommendation.coverImage.large}
+                        tooltipTitle={mediaRecommendation.title.romaji}
+                        rating={mediaRecommendation.meanScore}
+                    />
                 ))}
             </StyledSlider>
         </Tile>

@@ -65,7 +65,7 @@ const Home: React.FC<Props> = (props) => {
     );
 
     const searchValue = cachedSearchValue.search.searchInputValue;
-    const genresValues = cachedGenreFilters.filters.genresValues;
+    const genresValues = cachedGenreFilters.filters.genresValues.map((obj) => obj.value);;
 
     const { searchInputValue, isLoading } = searchVar();
 

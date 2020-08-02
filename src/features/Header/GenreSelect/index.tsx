@@ -85,14 +85,12 @@ export const GenreSelect: React.FC<Props> = (props) => {
     const { genresValues } = genreFilterVar();
 
     const handleSelect = (value: typeof options) => {
-        let arr = [];
-        value?.length !== 0 && value.map((obj) => arr.push(obj.value));
-        /*  console.log(value) */
-        genreFilterVar({ genresValues: arr });
+        console.log(value)
+        genreFilterVar({ genresValues: value });
     };
-
     return (
         <Select
+            value={genresValues}
             onChange={handleSelect}
             closeMenuOnSelect={false}
             components={animatedComponents}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import { Box } from '@material-ui/core';
 import { GenresChips } from '@/shared/components/GenresChips';
 import { RatingChip } from '@/shared/components/RatingChip';
+import { StyledSkeleton } from '@/shared/styled components';
+import { useImageLoad } from '@/shared/hooks/useImageLoad';
 
 const CardImage = styled(CardMedia)`
     && {
@@ -19,7 +21,8 @@ const CardImage = styled(CardMedia)`
 `;
 
 const Container = styled.div`
-    margin-top: 10px;
+    margin: 10px auto;
+    max-width: 1100px;
 `;
 
 type Props = {
@@ -35,19 +38,25 @@ type Props = {
 export const TitleItem: React.FC<Props> = (props) => {
     const { image, description, title, genres, rating, date, id } = props;
 
+    const { imageSrc, loading } = useImageLoad(
+        image,
+        'https://www.purefandom.com/wp-content/uploads/2018/12/Deku-crying-780x405.png'
+    );
+
     return (
         <Container>
             <Card>
                 <CardActionArea>
                     <Link exact to={`anime/${id}`}>
-                        <CardImage
-                            image={
-                                image
-                                    ? image
-                                    : 'https://www.purefandom.com/wp-content/uploads/2018/12/Deku-crying-780x405.png'
-                            }
-                            title={title}
-                        />
+                        {loading ? (
+                            <StyledSkeleton
+                                animation='pulse'
+                                variant='rect'
+                                height={350}
+                            />
+                        ) : (
+                            <CardImage component='img' src={imageSrc} />
+                        )}
                         <CardContent>
                             <Typography
                                 gutterBottom

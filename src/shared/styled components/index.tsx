@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Chip } from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 
 export const Tile = styled.div`
     background-color: white;
@@ -26,5 +27,11 @@ export const StyledInput = styled.input`
 
     &:focus {
         outline: unset;
+    }
+`;
+
+export const StyledSkeleton = styled(Skeleton)`
+    && {
+        background-color: rgba(72, 61, 139, 0.5);
     }
 `;

@@ -47,10 +47,10 @@ export const TitleList: React.FC<Props> = (props) => {
         variables: { page: 0, perPage: 10 }
     });
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoadingMore, setIsLoadingMore] = useState(false);
 
     const [loadMore] = useDebouncedCallback(() => {
-        setIsLoading(true);
+        setIsLoadingMore(true);
         fetchMore({
             variables: {
                 page: data.Page.pageInfo.currentPage + 1
@@ -83,7 +83,7 @@ export const TitleList: React.FC<Props> = (props) => {
 
             bottomoOffset < 900 && loadMore();
         });
-        setIsLoading(false);
+        setIsLoadingMore(false);
     });
 
     if (loading) return <LinearLoader/>;
@@ -104,7 +104,7 @@ export const TitleList: React.FC<Props> = (props) => {
                     description={item.description}
                 />
             ))}
-            {isLoading && <LinearLoader />}
+            {isLoadingMore && <LinearLoader />}
         </Container>
     );
 };
