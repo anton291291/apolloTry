@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
-import { TitleItem } from '../TitleItem';
+import { TitleItem } from '../../../features/TitleItem';
 import { Loader } from '@/shared/components/Loader';
 import { LinearLoader } from '@/shared/components/LinearLoader';
 import { useDebouncedCallback } from 'use-debounce/lib';
 import { FetchMoreType } from '@/shared/types';
+import { Page } from '@/generated/graphql';
 
 const Container = styled.div`
     padding-left: 20%;
@@ -13,15 +14,17 @@ const Container = styled.div`
 `;
 
 type Props = {
-    data: Array<any>;
+    data: { Page: Page };
     fetchMore: FetchMoreType;
     loading: Boolean;
 };
 
-export const SearchedList: React.FC<Props> = (props) => {
+export const List: React.FC<Props> = (props) => {
     const { data, fetchMore, loading } = props;
 
     const [isLoading, setIsLoading] = useState(false);
+
+    const ref = useRef<HTMLDivElement>(null);
 
     const [loadMore] = useDebouncedCallback(() => {
         setIsLoading(true);
@@ -46,13 +49,9 @@ export const SearchedList: React.FC<Props> = (props) => {
     }, 200);
 
     useEffect(() => {
-        const selector = document.querySelector('#searchScrollList');
         document.addEventListener('scroll', () => {
-            selector?.offsetHeight -
-                (window.pageYOffset + document.documentElement.clientHeight);
-
             const bottomoOffset =
-                selector?.offsetHeight -
+                ref.current?.offsetHeight -
                 (window.pageYOffset + document.documentElement.clientHeight);
 
             bottomoOffset < 900 && loadMore();
@@ -60,10 +59,10 @@ export const SearchedList: React.FC<Props> = (props) => {
         setIsLoading(false);
     });
 
-    if (loading) return <Loader />;
+    if (loading) return <LinearLoader />;
 
     return (
-        <Container id='searchScrollList'>
+        <Container ref={ref}>
             {data.Page.media.map((item) => (
                 <TitleItem
                     id={item.id}

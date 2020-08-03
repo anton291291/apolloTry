@@ -1,6 +1,4 @@
 import React from 'react';
-
-import styled from 'styled-components';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { genreFilterVar } from '@/shared/cache';

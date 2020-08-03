@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { TitleItem } from '../TitleItem';
 import { useDebouncedCallback } from 'use-debounce';
 import { LinearLoader } from '@/shared/components/LinearLoader';
+import { Page } from '@/generated/graphql';
 
 const Container = styled.div`
     padding-left: 20%;
@@ -43,9 +44,12 @@ type Props = {};
 export const TitleList: React.FC<Props> = (props) => {
     const {} = props;
 
-    const { loading, error, data, fetchMore } = useQuery(GET_TITLE_LIST, {
-        variables: { page: 0, perPage: 10 }
-    });
+    const { loading, error, data, fetchMore } = useQuery<{ Page: Page }>(
+        GET_TITLE_LIST,
+        {
+            variables: { page: 0, perPage: 10 }
+        }
+    );
 
     const [isLoadingMore, setIsLoadingMore] = useState(false);
 
@@ -74,11 +78,11 @@ export const TitleList: React.FC<Props> = (props) => {
     useEffect(() => {
         const selector = document.querySelector('#InfScrollList');
         document.addEventListener('scroll', () => {
-            selector?.offsetHeight -
+            (selector as HTMLElement)?.offsetHeight -
                 (window.pageYOffset + document.documentElement.clientHeight);
 
             const bottomoOffset =
-                selector?.offsetHeight -
+                (selector as HTMLElement)?.offsetHeight -
                 (window.pageYOffset + document.documentElement.clientHeight);
 
             bottomoOffset < 900 && loadMore();
@@ -86,7 +90,7 @@ export const TitleList: React.FC<Props> = (props) => {
         setIsLoadingMore(false);
     });
 
-    if (loading) return <LinearLoader/>;
+    if (loading) return <LinearLoader />;
 
     if (error) return <div>Error</div>;
 

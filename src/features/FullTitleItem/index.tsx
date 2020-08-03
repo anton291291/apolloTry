@@ -8,6 +8,7 @@ import { FullTitleRecomendations } from './FullTitleRecomendations';
 import { Box } from '@material-ui/core';
 import { FullTitleTagsChart } from './FullTitleTagsChart';
 import { LinearLoader } from '@/shared/components/LinearLoader';
+import { Media } from '@/generated/graphql';
 
 const Container = styled.div`
     margin: 0 15%;
@@ -73,7 +74,7 @@ export const FullTitleItem: React.FC<Props> = (props) => {
 
     const { id } = useParams();
 
-    const { loading, error, data } = useQuery(GET_FULL_TITLE_INFO, {
+    const { loading, error, data } = useQuery<{Media: Media}>(GET_FULL_TITLE_INFO, {
         variables: { id: id }
     });
 
@@ -98,11 +99,11 @@ export const FullTitleItem: React.FC<Props> = (props) => {
                     format={Media.format}
                     status={Media.status}
                     startDate={new Date(
-                        Object.values(Media.startDate)
+                        Object.values(Media.startDate) 
                     ).toLocaleDateString()}
                     endDate={new Date(
                         Object.values(Media.endDate)
-                    ).toLocaleDateString(Media.endDate)}
+                    ).toLocaleDateString(Media.endDate as string[])}
                     popularity={Media.popularity}
                 />
 

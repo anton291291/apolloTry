@@ -7,6 +7,7 @@ import Slider from 'react-slick';
 import { Tile } from '@/shared/styled components';
 import { Box, Typography, Tooltip } from '@material-ui/core';
 import { FullTitleRecommendationItem } from './FullTitleRecommendationItem';
+import { Recommendation } from '@/generated/graphql';
 
 const settings = {
     dots: false,
@@ -38,7 +39,7 @@ const StyledSlider = styled(Slider)`
 `;
 
 type Props = {
-    recommendedTitles: Array<string | {}>;
+    recommendedTitles: Recommendation[];
 };
 
 export const FullTitleRecomendations: React.FC<Props> = (props) => {

@@ -14,7 +14,7 @@ const Cover = styled.img`
 const StyledTooltip = styled(Tooltip)``;
 
 type Props = {
-    linkTo: string;
+    linkTo: number;
     tooltipTitle: string;
     rating: number;
     image: string;

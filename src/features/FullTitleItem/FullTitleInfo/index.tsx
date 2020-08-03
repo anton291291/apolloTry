@@ -1,7 +1,7 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { Box, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { Tile } from '@/shared/styled components';
 
 const InfoBlock = styled.div`
@@ -18,7 +18,7 @@ const ColumnTile = styled(Tile)`
 type Props = {
     status: string;
     format: string;
-    popularity: string;
+    popularity: number;
     startDate: string;
     endDate: string;
     countryOfOrigin: string;

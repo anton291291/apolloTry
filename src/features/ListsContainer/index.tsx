@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useQuery, gql, useLazyQuery } from '@apollo/client';
 import { searchVar } from '@/shared/cache';
 import { useDebouncedCallback } from 'use-debounce/lib';
-import { SearchedList } from '../SearchedList';
 import { LinearLoader } from '@/shared/components/LinearLoader';
-import { TitleList } from '../TitleList';
+import { TitleList } from './TitleList';
+import { List as SearchedList } from '@/shared/components/List';
 
 const GET_CACHED_SEARCH_VALUE = gql`
     query {
