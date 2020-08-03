@@ -13,10 +13,10 @@ const settings = {
     infinite: false,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 1
-    /*  autoplay: true,
+    slidesToScroll: 1,
+    autoplay: true,
     autoplaySpeed: 1000,
-    cssEase: 'linear' */
+    cssEase: 'linear'
 };
 
 const StyledSlider = styled(Slider)`

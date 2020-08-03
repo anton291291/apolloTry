@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { genreFilterVar } from '@/shared/cache';
+import { useQuery, gql } from '@apollo/client';
 
 type Props = {};
 const animatedComponents = makeAnimated();
@@ -79,15 +80,25 @@ const colourStyles = {
     })
 };
 
+const GET_CACHED_GENRE_FILTERS = gql`
+    query {
+        filters @client {
+            genresValues
+        }
+    }
+`;
+
 export const GenreSelect: React.FC<Props> = (props) => {
     const {} = props;
+
+    useQuery(GET_CACHED_GENRE_FILTERS);
 
     const { genresValues } = genreFilterVar();
 
     const handleSelect = (value: typeof options) => {
-        console.log(value)
         genreFilterVar({ genresValues: value });
     };
+ 
     return (
         <Select
             value={genresValues}
