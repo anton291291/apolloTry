@@ -5,6 +5,7 @@ import { TitleItem } from '../TitleItem';
 import { Loader } from '@/shared/components/Loader';
 import { LinearLoader } from '@/shared/components/LinearLoader';
 import { useDebouncedCallback } from 'use-debounce/lib';
+import { FetchMoreType } from '@/shared/types';
 
 const Container = styled.div`
     padding-left: 20%;
@@ -12,8 +13,8 @@ const Container = styled.div`
 `;
 
 type Props = {
-    data: Array<{}>;
-    fetchMore: Function;
+    data: Array<any>;
+    fetchMore: FetchMoreType;
     loading: Boolean;
 };
 

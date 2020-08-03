@@ -5,11 +5,12 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { genreFilterVar } from '@/shared/cache';
 import { useQuery, gql } from '@apollo/client';
+import { GenresValuesType } from '@/shared/types';
 
 type Props = {};
 const animatedComponents = makeAnimated();
 
-const options = [
+export const genresOptions = [
     { value: 'Action', label: 'Action', color: '#d64161' },
     { value: 'Adventure', label: 'Adventure', color: '#6b5b95' },
     { value: 'Comedy', label: 'Comedy', color: '#feb236' },
@@ -95,7 +96,7 @@ export const GenreSelect: React.FC<Props> = (props) => {
 
     const { genresValues } = genreFilterVar();
 
-    const handleSelect = (value: typeof options) => {
+    const handleSelect = (value: GenresValuesType) => {
         genreFilterVar({ genresValues: value });
     };
  
@@ -106,7 +107,7 @@ export const GenreSelect: React.FC<Props> = (props) => {
             closeMenuOnSelect={false}
             components={animatedComponents}
             isMulti
-            options={options}
+            options={genresOptions}
             styles={colourStyles}
         />
     );

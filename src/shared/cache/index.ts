@@ -1,15 +1,15 @@
 import { InMemoryCache } from '@apollo/client';
 import { makeVar } from '@apollo/client';
+import { GenresValuesType, SearchType } from '../types';
 
-export const searchVar = makeVar<{
-    searchInputValue: string;
-    isLoading: boolean;
-}>({
+export const searchVar = makeVar<SearchType>({
     searchInputValue: null,
     isLoading: false
 });
 
-export const genreFilterVar = makeVar<{ genresValues: Array<any> }>({
+export const genreFilterVar = makeVar<{
+    genresValues: GenresValuesType | Array<any>;
+}>({
     genresValues: []
 });
 
