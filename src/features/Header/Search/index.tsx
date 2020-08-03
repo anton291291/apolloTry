@@ -5,6 +5,7 @@ import { Box, CircularProgress, Fade } from '@material-ui/core';
 import { StyledInput } from '@/shared/styled components';
 import { searchVar } from '@/shared/cache';
 import ClearIcon from '@material-ui/icons/Clear';
+import { gql, useQuery } from '@apollo/client';
 
 const IconClear = styled(ClearIcon)`
     position: absolute;
@@ -42,10 +43,20 @@ const SearchProgress = styled(CircularProgress)`
     }
 `;
 
+const GET_CACHED_SEARCH_VALUE = gql`
+    query {
+        search @client {
+            searchInputValue
+        }
+    }
+`;
+
 type Props = {};
 
 export const Search: React.FC<Props> = (props) => {
     const {} = props;
+
+    useQuery(GET_CACHED_SEARCH_VALUE);
 
     const { searchInputValue, isLoading } = searchVar();
 
