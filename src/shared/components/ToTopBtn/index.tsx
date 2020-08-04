@@ -29,9 +29,14 @@ export const ToTopBtn: React.FC<Props> = (props) => {
     const [isShow, setIsShow] = useState(false);
 
     useEffect(() => {
-        document.addEventListener('scroll', () => {
+        const checkYoffset = () => {
             window.pageYOffset > 1000 ? setIsShow(true) : setIsShow(false);
-        });
+        };
+        document.addEventListener('scroll', checkYoffset);
+
+        return () => {
+            document.removeEventListener('scroll', checkYoffset);
+        };
     });
 
     const scrollToTop = () => {
