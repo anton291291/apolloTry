@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import styled from 'styled-components';
 import { TitleItem } from '../../../features/TitleItem';
-import { Loader } from '@/shared/components/Loader';
 import { LinearLoader } from '@/shared/components/LinearLoader';
 import { useDebouncedCallback } from 'use-debounce/lib';
 import { FetchMoreType } from '@/shared/types';
@@ -26,7 +25,7 @@ export const List: React.FC<Props> = (props) => {
 
     const ref = useRef<HTMLDivElement>(null);
 
-    const [loadMore] = useDebouncedCallback(() => {
+    const [debouncedFetchMore] = useDebouncedCallback(() => {
         setIsLoading(true);
         fetchMore({
             variables: {
@@ -49,14 +48,20 @@ export const List: React.FC<Props> = (props) => {
     }, 200);
 
     useEffect(() => {
-        document.addEventListener('scroll', () => {
+        const checkingBottomScroll = () => {
             const bottomoOffset =
                 ref.current?.offsetHeight -
                 (window.pageYOffset + document.documentElement.clientHeight);
 
-            bottomoOffset < 900 && loadMore();
-        });
+            bottomoOffset < 900 && debouncedFetchMore();
+        };
+
+        document.addEventListener('scroll', checkingBottomScroll);
         setIsLoading(false);
+
+        return () => {
+            document.removeEventListener('scroll', checkingBottomScroll);
+        };
     });
 
     if (loading) return <LinearLoader />;
